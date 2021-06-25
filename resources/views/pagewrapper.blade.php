@@ -4,9 +4,7 @@
     <link href="/css/app.css" rel="stylesheet">
 </head>
 <body>
-<!--
-TODO тут подтыкать контент.
--->
+@yield('page_content')
 
 <script src="/js/app.js"></script>
 </body>

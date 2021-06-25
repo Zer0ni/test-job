@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Message;
 
 class CreateMessagesTable extends Migration
 {
@@ -15,6 +16,8 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
+            $table->enum('author', Message::getAuthorsArray());
+            $table->text('content');
             $table->timestamps();
         });
     }
