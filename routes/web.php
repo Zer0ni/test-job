@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TicketCreationPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/', [TicketCreationPageController::class, 'initContent'])->middleware(['auth'])->name('dashboard');
+Route::post('/addTicket', [TicketCreationPageController::class, 'processAddTicket']);
 
 require __DIR__.'/auth.php';
