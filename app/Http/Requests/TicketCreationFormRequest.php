@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TicketCreationFormRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,10 +30,11 @@ class TicketCreationFormRequest extends FormRequest
             'subject' => 'required|min:3|max:256',
             'user_name' => 'required|alpha',
             'user_email' => 'required|email',
-            'client' => 'required|in:' . implode(',', Message::getAuthorsArray()),
+            'author' => 'required|in:' . implode(',', Message::getAuthorsArray()),
             'content' => 'present',
             'login' => 'present',
             'password' => 'present',
         ];
     }
+
 }

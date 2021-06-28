@@ -17,7 +17,8 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->enum('author', Message::getAuthorsArray());
-            $table->text('content');
+            $table->text('content')->nullable();
+            $table->unsignedBigInteger('ticketId');
             $table->timestamps();
         });
     }

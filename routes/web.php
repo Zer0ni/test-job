@@ -15,6 +15,6 @@ use App\Http\Controllers\TicketCreationPageController;
 */
 
 Route::get('/', [TicketCreationPageController::class, 'initContent'])->middleware(['auth'])->name('dashboard');
-Route::post('/addTicket', [TicketCreationPageController::class, 'processAddTicket']);
+Route::post('/addTicket', [TicketCreationPageController::class, 'processAddTicket'])->middleware(['ticket']);
 
 require __DIR__.'/auth.php';

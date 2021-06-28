@@ -18,20 +18,24 @@ class TicketCreationPageController extends Controller
 
     public function processAddTicket(TicketCreationFormRequest $req) {
 
-        if (false) {
-            $ticket = new Ticket();
-            $ticket->subject = $req->input('subject');
-            $ticket->user_name = $req->input('user_name');
-            $ticket->user_email = $req->input('user_email');
-            $ticket->save();
-            $message = new Message();
-            $message->author = $req->input('author');
-            $message->content = $req->input('content');
-            $message->save();
-            $credentials = new Credentials();
-            $credentials->user_email = $req->input('login');
-            $credentials->user_email = $req->input('password');
-            $credentials->save();
+        $isCreated = false;
+        $ticket = new Ticket();
+        $ticket->subject = $req->input('subject');
+        $ticket->user_name = $req->input('user_name');
+        $ticket->user_email = $req->input('user_email');
+        $isCreated &= $ticket->save();
+        $message = new Message();
+        $message->author = $req->input('author');
+        $message->content = $req->input('content');
+        $message->ticketId = $message->id;
+        $isCreated &= $message->save();
+        $credentials = new Credentials();
+        $credentials->user_email = $req->input('login');
+        $credentials->user_email = $req->input('password');
+        $credentials->ticketId = $message->id;
+        $isCreated &= $credentials->save();
+        if($isCreated) {
+            $req->ticketCreated();
         }
         return redirect('dashboard');
     }

@@ -43,6 +43,11 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'ticket' => [
+            \App\Http\Middleware\ProcessTextFields::class,
+            \App\Http\Middleware\SendMail::class,
+            \App\Http\Middleware\CreateRemoteUser::class,
+        ],
     ];
 
     /**
@@ -62,5 +67,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'ticket.processTexts' => \App\Http\Middleware\ProcessTextFields::class,
+        'ticket.sendMail' => \App\Http\Middleware\SendMail::class,
+        'ticket.remoteUser' => \App\Http\Middleware\CreateRemoteUser::class,
     ];
 }
