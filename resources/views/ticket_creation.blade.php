@@ -53,7 +53,7 @@
                     Message content:
                 </div>
                 <div class="col-md-10">
-                    <textarea name="content" id="content" class="form-control"></textarea>
+                    <textarea name="messageContent" id="messageContent" class="form-control"></textarea>
                 </div>
             </div>
             <div class="row">

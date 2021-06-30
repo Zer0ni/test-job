@@ -45,7 +45,7 @@ class Kernel extends HttpKernel
         ],
         'ticket' => [
             \App\Http\Middleware\ProcessTextFields::class,
-            \App\Http\Middleware\SendMail::class,
+            \App\Http\Middleware\SendTickedConfirmationMail::class,
             \App\Http\Middleware\CreateRemoteUser::class,
         ],
     ];
@@ -68,7 +68,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'ticket.processTexts' => \App\Http\Middleware\ProcessTextFields::class,
-        'ticket.sendMail' => \App\Http\Middleware\SendMail::class,
+        'ticket.sendMail' => \App\Http\Middleware\SendTickedConfirmationMail::class,
         'ticket.remoteUser' => \App\Http\Middleware\CreateRemoteUser::class,
     ];
 }

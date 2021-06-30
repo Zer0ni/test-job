@@ -31,7 +31,7 @@ class TicketCreationFormRequest extends FormRequest
             'user_name' => 'required|alpha',
             'user_email' => 'required|email',
             'author' => 'required|in:' . implode(',', Message::getAuthorsArray()),
-            'content' => 'present',
+            'messageContent' => 'required',
             'login' => 'present',
             'password' => 'present',
         ];

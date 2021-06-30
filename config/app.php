@@ -175,6 +175,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //own providers
+        App\Providers\StringProcessorServiceProvider::class,
+        App\Providers\ExtrernalUserProvider::class,
+
     ],
 
     /*
@@ -228,6 +232,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        //own aliaces
+        'MessageContentProcessors' => App\Facades\MessageContentProcessors::class,
+        'ExternalUserService' => App\Facades\ExternalUser::class,
     ],
 
 ];

@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Snipe\BanBuilder\CensorWords;
+use App\Facades\MessageContentProcessors;
 
 class processTextFields
 {
@@ -17,19 +17,20 @@ class processTextFields
      */
     public function handle(Request $request, Closure $next)
     {
-        $request->merge(['content' => $this->doProcess($request->get('content'))]);
+        if(strlen($request->input('messageContent')) > 0) {
+            $request->merge(
+                [
+                    'messageContent' => $this->processMessageContent($request->get('messageContent')),
+                ]
+            );
+        }
 
         return $next($request);
     }
 
-    /*TODO move to processors
-    * Copy data processor conception from https://github.com/czim/laravel-processor
-    */
-    public function doProcess($string) {
+    public function processMessageContent(string $string):string {
 
-        $string = htmlspecialchars($string);
-        $censor = new CensorWords;
-        $string = $censor->censorString($string);
+        $string = MessageContentProcessors::doProcess($string);
 
         return $string;
     }

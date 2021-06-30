@@ -26,14 +26,17 @@ class TicketCreationPageController extends Controller
         $isCreated &= $ticket->save();
         $message = new Message();
         $message->author = $req->input('author');
-        $message->content = $req->input('content');
-        $message->ticketId = $message->id;
+        $message->content = $req->input('messageContent');
+        $message->ticketId = $ticket->id;
         $isCreated &= $message->save();
-        $credentials = new Credentials();
-        $credentials->user_email = $req->input('login');
-        $credentials->user_email = $req->input('password');
-        $credentials->ticketId = $message->id;
-        $isCreated &= $credentials->save();
+        if(strlen($req->input('login'))>0 || strlen($req->input('password'))>0) {
+            $credentials = new Credentials();
+            $credentials->login = $req->input('login');
+            $credentials->password = $req->input('password');
+            $credentials->messageId = $message->id;
+            $isCreated &= $credentials->save();
+        }
+
         if($isCreated) {
             $req->ticketCreated();
         }
